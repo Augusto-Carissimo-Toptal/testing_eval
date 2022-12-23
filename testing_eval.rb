@@ -14,9 +14,26 @@
 
 
 class Map
+  attr_reader :height, :width, :cursor
+
+  def initialize(height, width, cursor)
+    @height = height
+    @width = width
+    @cursor = cursor
+  end
+
+  
+
 end
 
 class Cursor
+
+  attr_reader :x, :y
+
+  def initialize(x,y)
+    @x = x
+    @y = y
+  end    
 end
 
 class Test
@@ -43,15 +60,17 @@ class Test
   end
 
   def assert_same(class_atrr, expected_attr)
-    if class_atrr.attr == expected_attr
+    if class_atrr == expected_attr
       return 'Pass'
     else
       return <<~MSG
       Expected class attribute is: #{expected_attr}
-      but instead is: #{class_atrr.attr}
+      but instead is: #{_class.class_atrr}
       MSG
     end
   end
+
+  
 
 end
 
@@ -60,11 +79,12 @@ test = Test.new
 puts test.assert_exist(Map)
 puts test.assert_exist(Cursor)
 
-puts test.assert_kind_of(Map.new, Map)
-puts test.assert_kind_of(Cursor.new, Cursor)
+puts test.assert_kind_of(Map.new(5,5,5), Map)
+puts test.assert_kind_of(Cursor.new(1,1), Cursor)
 
-puts test.assert_same(Map.new(5,5,5), 5) #height
-# puts test.assert_same(Map.new(5,5,5), 5) #width
-# puts test.assert_same(Map.new(5,5,5), 5) #cursor
-# puts test.assert_same(Cursor.new(1,1, 1) #x
-# puts test.assert_same(Cursor.new(1,1, 1) #y
+puts test.assert_same(Map.new(5,5,5).height, 5) #height
+puts test.assert_same(Map.new(5,5,5).width, 5) #width
+puts test.assert_same(Map.new(5,5,5).cursor, 5) #cursor
+puts test.assert_same(Cursor.new(1,1).x, 1) #x
+puts test.assert_same(Cursor.new(1,1).y, 1) #y
+
