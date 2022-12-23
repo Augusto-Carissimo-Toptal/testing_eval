@@ -41,6 +41,18 @@ class Test
       MSG
     end
   end
+
+  def assert_same(class_atrr, expected_attr)
+    if class_atrr.attr == expected_attr
+      return 'Pass'
+    else
+      return <<~MSG
+      Expected class attribute is: #{expected_attr}
+      but instead is: #{class_atrr.attr}
+      MSG
+    end
+  end
+
 end
 
 test = Test.new
@@ -50,3 +62,9 @@ puts test.assert_exist(Cursor)
 
 puts test.assert_kind_of(Map.new, Map)
 puts test.assert_kind_of(Cursor.new, Cursor)
+
+puts test.assert_same(Map.new(5,5,5), 5) #height
+# puts test.assert_same(Map.new(5,5,5), 5) #width
+# puts test.assert_same(Map.new(5,5,5), 5) #cursor
+# puts test.assert_same(Cursor.new(1,1, 1) #x
+# puts test.assert_same(Cursor.new(1,1, 1) #y
